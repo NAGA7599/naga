@@ -9,13 +9,14 @@
       --muted:   #888;
       --muted2:  #BBB;
       --violet:  #ff5f00;
-      --vlight:  rgba(124,92,252,0.08);
+      --vlight:  rgba(255, 94, 0, 0.115);
       --white:   #FFFFFF;
       --border:  #D8D5CF;
       --r:       4px;
       --mono:    'DM Mono', monospace;
       --sans:    'Inter', sans-serif;
     }
+
 
     html { scroll-behavior: smooth; }
 
