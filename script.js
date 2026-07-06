@@ -78,12 +78,12 @@ document.querySelectorAll('a, button, .pill, .addon-card').forEach(el => {
     cells.forEach(cell => {
       const v = (Math.sin(t * 0.6 + cell.phase) + 1) / 2;
       // grid line
-      ctx.strokeStyle = `rgba(0,0,19,${0.04 + v * 0.22})`;
+      ctx.strokeStyle = `rgba(0,0,50,${0.04 + v * 0.22})`;
       ctx.lineWidth = 1;
       ctx.strokeRect(cell.c * SZ, cell.r * SZ, SZ, SZ);
       // dot at corner
-      const dotAlpha = 0.05 + v * 0.45;
-      ctx.fillStyle = `rgba(0,0,19,${dotAlpha})`;
+      const dotAlpha = 0.04 + v * 0.22;
+      ctx.fillStyle = `rgba(0,0,50,${dotAlpha})`;
       ctx.fillRect(cell.c * SZ - 2, cell.r * SZ - 2, 4, 4);
     });
     t += 0.012;
