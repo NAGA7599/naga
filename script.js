@@ -21,14 +21,14 @@ document.querySelectorAll('a, button, .pill, .addon-card').forEach(el => {
 (function buildLogo() {
   // 8x8 two-bar shape: 0=off, 1=on(violet)
   const shape = [
-    [0,0,0,0,0,0,0,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,0,0,0,0,0,0,0],
+    [1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1],
   ];
   const px = document.getElementById('logoPx');
   shape.forEach(row => {
@@ -78,7 +78,7 @@ document.querySelectorAll('a, button, .pill, .addon-card').forEach(el => {
     cells.forEach(cell => {
       const v = (Math.sin(t * 0.6 + cell.phase) + 1) / 2;
       // grid line
-      ctx.strokeStyle = `rgba(124,92,252,${0.04 + v * 0.22})`;
+      ctx.strokeStyle = `rgba(252,168,93,${0.04 + v * 0.22})`;
       ctx.lineWidth = 1;
       ctx.strokeRect(cell.c * SZ, cell.r * SZ, SZ, SZ);
       // dot at corner

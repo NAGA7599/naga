@@ -122,7 +122,7 @@
 
     /* animated pixel logomark */
     .logo-px {
-      width: 34px; height: 34px;
+      width: 37px; height: 37px;
       display: grid;
       grid-template-columns: repeat(8,1fr);
       grid-template-rows: repeat(8,1fr);
@@ -134,17 +134,17 @@
     }
 
     .logo-px span {
-      border-radius: 1px;
+      border-radius: 0px;
       background: rgba(247,245,240,0.15);
       transition: background .3s;
     }
 
-    .logo-px span.on { background: var(--violet); }
+    .logo-px span.on { background: #FFFFFF; }
 
     .logo-name {
       font-family: var(--mono);
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 1rem;
       letter-spacing: -0.01em;
     }
 
