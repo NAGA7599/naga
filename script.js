@@ -83,7 +83,7 @@ document.querySelectorAll('a, button, .pill, .addon-card').forEach(el => {
       ctx.strokeRect(cell.c * SZ, cell.r * SZ, SZ, SZ);
       // dot at corner
       const dotAlpha = 0.05 + v * 0.45;
-      ctx.fillStyle = `rgba(124,92,252,${dotAlpha})`;
+      ctx.fillStyle = `rgba(252,168,93,${dotAlpha})`;
       ctx.fillRect(cell.c * SZ - 2, cell.r * SZ - 2, 4, 4);
     });
     t += 0.012;
