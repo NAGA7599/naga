@@ -768,3 +768,17 @@
     }
     .detail-actions { display: flex; gap: .7rem; margin-top: 1.8rem; }
     .detail-not-found { text-align: center; padding: 6rem 1.5rem; color: var(--muted); }
+    .detail-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: .8rem;
+    }
+    .detail-gallery-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: transform .15s ease;
+    }
+    .detail-gallery-img:hover { transform: scale(1.03); }

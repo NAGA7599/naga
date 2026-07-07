@@ -51,10 +51,11 @@ function renderAddonDetail() {
 
     <div class="detail-head">
       <div class="detail-thumb">
-        ${addon.image
-          ? `<img src="${addon.image}" alt="${addon.name}" class="detail-thumb-img">`
-          : `<div class="px-art" id="detailPxArt"></div>`
+        ${(addon.detailImage || addon.image)
+          ? `<img src="${addon.detailImage || addon.image}" alt="${addon.name}" class="detail-thumb-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+          : ''
         }
+        <div class="px-art" id="detailPxArt" style="${(addon.detailImage || addon.image) ? 'display:none;' : ''}"></div>
       </div>
       <div>
         <h1 class="detail-title">${addon.name}</h1>
@@ -66,6 +67,13 @@ function renderAddonDetail() {
 
     <div class="detail-section-title">features</div>
     <ul class="card-features">${addon.features.map(f => `<li>${f}</li>`).join('')}</ul>
+
+    ${addon.gallery && addon.gallery.length > 0 ? `
+      <div class="detail-section-title">gallery</div>
+      <div class="detail-gallery">
+        ${addon.gallery.map(src => `<img src="${src}" alt="${addon.name} screenshot" class="detail-gallery-img">`).join('')}
+      </div>
+    ` : ''}
 
     <div class="detail-actions">
       <a href="${addon.downloadUrl}" class="btn btn-primary">download</a>
@@ -82,7 +90,7 @@ function renderAddonDetail() {
   `;
 
   const pxArtEl = document.getElementById('detailPxArt');
-  if (pxArtEl) renderPxArt(pxArtEl, addon.pxPattern);
+  if (pxArtEl) renderPxArt(pxArtEl, addon.pxPattern); // selalu diisi, siap tampil kalau foto gagal load
 
   // update judul tab browser sesuai addon yang dibuka
   document.title = `${addon.name} — Oceanst`;

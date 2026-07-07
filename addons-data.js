@@ -8,6 +8,18 @@
    - Kosongkan / hapus field ini -> tampil pixel-art (pxPattern).
    - Isi dengan path file gambar (mis. "images/deep-creatures.png")
      -> otomatis tampil gambar itu, menggantikan pixel-art.
+   - Dipakai di CARD homepage (index.html).
+
+   Field "detailImage" (opsional):
+   - Foto PERSEGI yang tampil di halaman detail (addon.html),
+     terpisah dari "image" di atas. Kalau dikosongkan, halaman
+     detail akan pakai "image" sebagai cadangan, lalu pixel-art
+     kalau dua-duanya kosong.
+
+   Field "gallery" (opsional, array):
+   - Daftar foto tambahan yang tampil sebagai galeri di bawah
+     deskripsi pada halaman detail. Boleh diisi berapa saja
+     (0, 1, 5, dst) -> otomatis menyesuaikan.
 ══════════════════════════════════════════════ */
 const ADDONS = [
   {
@@ -15,7 +27,13 @@ const ADDONS = [
     name: 'Deep Creatures',
     category: 'mob',
     categoryLabel: 'mob',
-    image: null,
+    image: "images/thumbnail/bvg_j_1.png",
+    detailImage: 'images/detail/bvg_j_1.png',
+    gallery: [ 
+      'images/gallery/deep-creatures-1.png',
+      'images/gallery/deep-creatures-2.png',
+      'images/gallery/deep-creatures-3.png'
+    ],
     desc: '12 new ocean mobs with unique behaviors, loot tables, and custom AI.',
     longDesc: 'Deep Creatures introduces a full ecosystem of new ocean mobs to Minecraft Bedrock. Each entity ships with hand-tuned AI behavior, unique loot tables, and custom animation controllers — built to feel native alongside vanilla mobs.',
     features: [
