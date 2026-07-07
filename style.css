@@ -746,7 +746,7 @@
     .detail-head { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 1.5rem; }
     .detail-thumb {
       background: var(--ink); border-radius: var(--r);
-      padding: 14px; flex-shrink: 0;
+      padding: 2px; flex-shrink: 0;
       width: 96px; height: 96px;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
@@ -774,11 +774,25 @@
       gap: .8rem;
     }
     .detail-gallery-img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
+      width: 80%;
+      aspect-ratio: 16 / 9;
       object-fit: cover;
       border-radius: var(--r);
       cursor: pointer;
       transition: transform .15s ease;
     }
-    .detail-gallery-img:hover { transform: scale(1.03); }
+    .detail-tutorial-img:hover { transform: scale(1.03); }
+        .detail-tutorial {
+      display: block;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: .8rem;
+    }
+    .detail-tutorial-img {
+      width: 80%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: transform .15s ease;
+    }
+    .detail-tutorial-img:hover { transform: scale(1.03); }

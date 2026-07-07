@@ -68,6 +68,13 @@ function renderAddonDetail() {
     <div class="detail-section-title">features</div>
     <ul class="card-features">${addon.features.map(f => `<li>${f}</li>`).join('')}</ul>
 
+    ${addon.tutorial && addon.tutorial.length > 0 ? `
+      <div class="detail-section-title">TUTORIAL</div>
+      <div class="detail-tutorial">
+        ${addon.tutorial.map(src => `<img src="${src}" alt="${addon.name} screenshot" class="detail-tutorial-img">`).join('')}
+      </div>
+    ` : ''}
+
     ${addon.gallery && addon.gallery.length > 0 ? `
       <div class="detail-section-title">gallery</div>
       <div class="detail-gallery">
@@ -109,14 +116,14 @@ function renderAddonDetail() {
   });
 
   const shape = [
-    [0,0,0,0,0,0,0,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,1,1,0,0,1,1,0],
-    [0,0,0,0,0,0,0,0],
+    [1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,1,0,0,1,0,1],
+    [1,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1],
   ];
   const px = document.getElementById('logoPx');
   shape.forEach(row => row.forEach(v => {

@@ -30,9 +30,13 @@ const ADDONS = [
     image: "images/thumbnail/bvg_j_1.png",
     detailImage: 'images/detail/bvg_j_1.png',
     gallery: [ 
-      'images/gallery/deep-creatures-1.png',
-      'images/gallery/deep-creatures-2.png',
-      'images/gallery/deep-creatures-3.png'
+      'images/thumbnail/bvg_j_1.png',
+      'images/thumbnail/bvg_j_1.png',
+      'images/thumbnail/bvg_j_1.png'
+    ],
+    tutorial: [
+      'images/thumbnail/bvg_j_1.png',
+      'images/thumbnail/bvg_j_1.png'
     ],
     desc: '12 new ocean mobs with unique behaviors, loot tables, and custom AI.',
     longDesc: 'Deep Creatures introduces a full ecosystem of new ocean mobs to Minecraft Bedrock. Each entity ships with hand-tuned AI behavior, unique loot tables, and custom animation controllers — built to feel native alongside vanilla mobs.',
