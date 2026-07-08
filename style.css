@@ -560,13 +560,16 @@
     .contact-wrap {
       border-top: 1px solid var(--border);
       padding: clamp(3rem,6vw,5.5rem) clamp(1.25rem,5vw,4rem) clamp(4rem,8vw,8rem);
+      
     }
 
     .contact-inner { max-width: 600px; margin: 0 auto; }
 
     .socials {
-      display: flex; flex-wrap: wrap; gap: .5rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: .5rem;
       margin: 1.75rem 0 2rem;
+      
+      
     }
 
     .social-link {
@@ -576,6 +579,7 @@
       border: 1px solid var(--border);
       padding: .32rem .85rem; border-radius: var(--r);
       transition: all .15s;
+      align-items: center; justify-content: center;
     }
 
     .social-link:hover { color: var(--ink); border-color: var(--ink); }

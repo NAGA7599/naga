@@ -50,7 +50,7 @@ document.querySelectorAll('a, button, .pill, .addon-card').forEach(el => {
   const left   = edge.filter(c => c.col === 0 && c.row > 0 && c.row < size - 1).sort((a, b) => b.row - a.row);
   const chaseOrder = [...top, ...right, ...bottom, ...left];
 
-  const LOOP_MS = 10000;
+  const LOOP_MS = 3000;
   const step = LOOP_MS / chaseOrder.length;
   let chaseIndex = 0;
   setInterval(() => {
@@ -185,10 +185,9 @@ function goToAddon(id) {
 ══════════════════════════════ */
 (function buildMarquee() {
   const items = [
-    'Deep Creatures', 'Tidal Arsenal', 'Abyssal Biomes',
-    'HUD+', 'Apex Predators', 'Sunken Kingdoms',
-    'Mob Addons', 'Item Addons', 'World Generation', 'UI Utility',
-    'Bedrock Edition', 'Free to Download', 'Oceanst Studio',
+    'BVG J', 'Db 1004', 'Nexora',
+    'Foxtron T',
+    'Bedrock Edition', 'Free to Download',
   ];
   const track = document.getElementById('mqTrack');
   // duplicate for seamless loop

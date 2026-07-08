@@ -23,10 +23,10 @@
 ══════════════════════════════════════════════ */
 const ADDONS = [
   {
-    id: 'deep-creatures',
-    name: 'Deep Creatures',
-    category: 'mob',
-    categoryLabel: 'mob',
+    id: 'BVG-J-Series',
+    name: 'BVG J-Series',
+    category: 'Train',
+    categoryLabel: 'Train',
     image: "images/thumbnail/bvg_j_1.png",
     detailImage: 'images/detail/bvg_j_1.png',
     gallery: [ 
