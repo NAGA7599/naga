@@ -31,21 +31,33 @@ document.querySelectorAll('a, button, .pill, .addon-card').forEach(el => {
     [1,1,1,1,1,1,1,1],
   ];
   const px = document.getElementById('logoPx');
-  shape.forEach(row => {
-    row.forEach(v => {
+  const size = shape.length;
+  const cells = [];
+  shape.forEach((row, r) => {
+    row.forEach((v, c) => {
       const s = document.createElement('span');
       if (v === 1) s.classList.add('on');
       px.appendChild(s);
+      cells.push({ el: s, row: r, col: c, on: v === 1 });
     });
   });
 
-  // random pixel shimmer
-  const ons = px.querySelectorAll('.on');
+  // pixel paling luar menyala bergantian searah jarum jam, 1 putaran penuh = 5 detik, lalu diulang terus
+  const edge = cells.filter(c => c.on && (c.row === 0 || c.row === size - 1 || c.col === 0 || c.col === size - 1));
+  const top    = edge.filter(c => c.row === 0).sort((a, b) => a.col - b.col);
+  const right  = edge.filter(c => c.col === size - 1 && c.row > 0 && c.row < size - 1).sort((a, b) => a.row - b.row);
+  const bottom = edge.filter(c => c.row === size - 1).sort((a, b) => b.col - a.col);
+  const left   = edge.filter(c => c.col === 0 && c.row > 0 && c.row < size - 1).sort((a, b) => b.row - a.row);
+  const chaseOrder = [...top, ...right, ...bottom, ...left];
+
+  const LOOP_MS = 10000;
+  const step = LOOP_MS / chaseOrder.length;
+  let chaseIndex = 0;
   setInterval(() => {
-    const el = ons[Math.floor(Math.random() * ons.length)];
-    el.style.opacity = '0.4';
-    setTimeout(() => el.style.opacity = '', 300);
-  }, 800);
+    chaseOrder.forEach(c => c.el.classList.remove('chase'));
+    chaseOrder[chaseIndex].el.classList.add('chase');
+    chaseIndex = (chaseIndex + 1) % chaseOrder.length;
+  }, step);
 })();
 
 /* ══════════════════════════════

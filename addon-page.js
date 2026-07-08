@@ -51,11 +51,11 @@ function renderAddonDetail() {
 
     <div class="detail-head">
       <div class="detail-thumb">
-        ${(addon.detailImage || addon.image)
-          ? `<img src="${addon.detailImage || addon.image}" alt="${addon.name}" class="detail-thumb-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+        ${(addon.image || addon.image)
+          ? `<img src="${addon.image || addon.image}" alt="${addon.name}" class="detail-thumb-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
           : ''
         }
-        <div class="px-art" id="detailPxArt" style="${(addon.detailImage || addon.image) ? 'display:none;' : ''}"></div>
+        <div class="px-art" id="detailPxArt" style="${(addon.thumbnail || addon.image) ? 'display:none;' : ''}"></div>
       </div>
       <div>
         <h1 class="detail-title">${addon.name}</h1>
@@ -77,8 +77,14 @@ function renderAddonDetail() {
 
     ${addon.gallery && addon.gallery.length > 0 ? `
       <div class="detail-section-title">gallery</div>
-      <div class="detail-gallery">
-        ${addon.gallery.map(src => `<img src="${src}" alt="${addon.name} screenshot" class="detail-gallery-img">`).join('')}
+      <div class="gallery-slider" id="gallerySlider">
+        <div class="gallery-viewer">
+          <div class="gallery-track" id="galleryTrack"></div>
+          <button class="gallery-nav prev" id="galleryPrev" aria-label="Foto sebelumnya">‹</button>
+          <button class="gallery-nav next" id="galleryNext" aria-label="Foto berikutnya">›</button>
+          <div class="gallery-counter"><span id="galleryNow">1</span>/<span id="galleryTotal">${addon.gallery.length}</span></div>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
       </div>
     ` : ''}
 
@@ -99,8 +105,89 @@ function renderAddonDetail() {
   const pxArtEl = document.getElementById('detailPxArt');
   if (pxArtEl) renderPxArt(pxArtEl, addon.pxPattern); // selalu diisi, siap tampil kalau foto gagal load
 
+  // gallery: 1 foto tampil, sisanya bisa di-slide (swipe/drag/panah/thumbnail)
+  if (addon.gallery && addon.gallery.length > 0) initGallerySlider(addon.gallery, addon.name);
+
   // update judul tab browser sesuai addon yang dibuka
   document.title = `${addon.name} — Oceanst`;
+}
+
+/* ── slider galeri: satu foto tampil, sisanya di filmstrip bawah ── */
+function initGallerySlider(images, altBase) {
+  const root = document.getElementById('gallerySlider');
+  if (!root) return;
+
+  const viewer = root.querySelector('.gallery-viewer');
+  const track = document.getElementById('galleryTrack');
+  const thumbs = document.getElementById('galleryThumbs');
+  const nowEl = document.getElementById('galleryNow');
+  let current = 0;
+
+  images.forEach((src, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'gallery-slide';
+    slide.innerHTML = `<img src="${src}" alt="${altBase || 'Screenshot'} ${i + 1}" loading="${i === 0 ? 'eager' : 'lazy'}">`;
+    track.appendChild(slide);
+
+    const th = document.createElement('div');
+    th.className = 'gallery-thumb';
+    th.innerHTML = `<img src="${src}" alt="">`;
+    th.addEventListener('click', () => goTo(i));
+    thumbs.appendChild(th);
+  });
+
+  function render() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+    nowEl.textContent = current + 1;
+    [...thumbs.children].forEach((t, i) => {
+      t.classList.toggle('active', i === current);
+      if (i === current) t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+  }
+
+  function goTo(i) {
+    current = (i + images.length) % images.length;
+    render();
+  }
+
+  root.querySelector('#galleryPrev').addEventListener('click', () => goTo(current - 1));
+  root.querySelector('#galleryNext').addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', e => {
+    if (document.body.contains(root)) {
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    }
+  });
+
+  let startX = 0, dragging = false, deltaX = 0;
+  viewer.addEventListener('pointerdown', e => {
+    dragging = true;
+    startX = e.clientX;
+    track.style.transition = 'none';
+  });
+  viewer.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    deltaX = e.clientX - startX;
+    const pct = (deltaX / viewer.clientWidth) * 100;
+    track.style.transform = `translateX(calc(-${current * 100}% + ${pct}%))`;
+  });
+  window.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false;
+    track.style.transition = '';
+    if (Math.abs(deltaX) > viewer.clientWidth * 0.18) {
+      goTo(current + (deltaX < 0 ? 1 : -1));
+    } else {
+      render();
+    }
+    deltaX = 0;
+  });
+  viewer.addEventListener('pointerleave', () => {
+    if (dragging) window.dispatchEvent(new Event('pointerup'));
+  });
+
+  render();
 }
 
 /* ── cursor + logo, disalin dari script.js supaya nav tetap konsisten ── */
