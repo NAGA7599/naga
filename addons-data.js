@@ -30,30 +30,26 @@ const ADDONS = [
     image: "images/thumbnail/bvg_j_1.png",
     detailImage: 'images/detail/bvg_j_1.png',
     gallery: [ 
-      'images/thumbnail/bvg_j_1.png',
-      'images/thumbnail/bvg_j_1.png',
-      'images/thumbnail/bvg_j_1.png'
-    ],
-    tutorial: [
-      'images/thumbnail/bvg_j_1.png',
-      'images/thumbnail/bvg_j_1.png'
+      'images/detail/bvg_j/1.png',
+      'images/detail/bvg_j/2.png',
+      'images/detail/bvg_j/3.png',
+      'images/detail/bvg_j/4.png'
     ],
     desc: '12 new ocean mobs with unique behaviors, loot tables, and custom AI.',
-    longDesc: 'Deep Creatures introduces a full ecosystem of new ocean mobs to Minecraft Bedrock. Each entity ships with hand-tuned AI behavior, unique loot tables, and custom animation controllers — built to feel native alongside vanilla mobs.',
+    longDesc: 'This addon using the BVG J-series model which BVG ordered in 2022 for the large network on the Berlin U-bahn, but has experienced delays with the estimated completion in 2026 for the first delivery',
     features: [
-      '12 new ocean entities with custom AI',
-      'Unique loot tables and rare drops',
-      'Compatible with vanilla biomes',
-      'Animation controller animations'
+      'Acceleration: Normal',
+      'Maximum Speed: 120 Kmh',
+      'Braking: Normal',
+      'Capacity: 14 passengers + 1 driver'
+
     ],
     version: 'v1.3.0',
     mcVersion: 'BE 1.21',
     downloadUrl: '#',
     pxPattern: [[0,1,1,0,1,1,0],[1,1,0,1,1,0,1],[0,2,2,2,2,2,0],[0,0,2,2,2,0,0],[0,0,0,2,0,0,0]],
     changelog: [
-      {ver:'v1.3.0', notes:['Added 2 bioluminescent jellyfish variants','Fixed spawn rates in warm ocean biomes','Improved AI pathfinding for eels']},
-      {ver:'v1.2.0', notes:['Added anglerfish with lure attack','New rare drop: Deep Pearl']},
-      {ver:'v1.0.0', notes:['Initial release with 10 base mobs']}
+      {ver:'v1.3.0', notes:['Beta release',]},
     ]
   },
 ]

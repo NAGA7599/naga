@@ -68,12 +68,7 @@ function renderAddonDetail() {
     <div class="detail-section-title">features</div>
     <ul class="card-features">${addon.features.map(f => `<li>${f}</li>`).join('')}</ul>
 
-    ${addon.tutorial && addon.tutorial.length > 0 ? `
-      <div class="detail-section-title">TUTORIAL</div>
-      <div class="detail-tutorial">
-        ${addon.tutorial.map(src => `<img src="${src}" alt="${addon.name} screenshot" class="detail-tutorial-img">`).join('')}
-      </div>
-    ` : ''}
+    
 
     ${addon.gallery && addon.gallery.length > 0 ? `
       <div class="detail-section-title">gallery</div>
@@ -105,22 +100,26 @@ function renderAddonDetail() {
   const pxArtEl = document.getElementById('detailPxArt');
   if (pxArtEl) renderPxArt(pxArtEl, addon.pxPattern); // selalu diisi, siap tampil kalau foto gagal load
 
-  // gallery: 1 foto tampil, sisanya bisa di-slide (swipe/drag/panah/thumbnail)
-  if (addon.gallery && addon.gallery.length > 0) initGallerySlider(addon.gallery, addon.name);
+  // tutorial & gallery: 1 foto tampil, sisanya bisa di-slide (swipe/drag/panah/thumbnail)
+  if (addon.tutorial && addon.tutorial.length > 0) initGallerySlider(addon.tutorial, addon.name, 'tutorial');
+  if (addon.gallery && addon.gallery.length > 0) initGallerySlider(addon.gallery, addon.name, 'gallery');
 
   // update judul tab browser sesuai addon yang dibuka
   document.title = `${addon.name} — Oceanst`;
 }
 
-/* ── slider galeri: satu foto tampil, sisanya di filmstrip bawah ── */
-function initGallerySlider(images, altBase) {
-  const root = document.getElementById('gallerySlider');
+/* ── slider galeri/tutorial: satu foto tampil, sisanya di filmstrip bawah ──
+   prefix: 'gallery' atau 'tutorial', supaya id elemen tidak bentrok
+   ketika kedua slider tampil sekaligus di satu halaman ── */
+function initGallerySlider(images, altBase, prefix) {
+  prefix = prefix || 'gallery';
+  const root = document.getElementById(`${prefix}Slider`);
   if (!root) return;
 
   const viewer = root.querySelector('.gallery-viewer');
-  const track = document.getElementById('galleryTrack');
-  const thumbs = document.getElementById('galleryThumbs');
-  const nowEl = document.getElementById('galleryNow');
+  const track = document.getElementById(`${prefix}Track`);
+  const thumbs = document.getElementById(`${prefix}Thumbs`);
+  const nowEl = document.getElementById(`${prefix}Now`);
   let current = 0;
 
   images.forEach((src, i) => {
@@ -150,8 +149,8 @@ function initGallerySlider(images, altBase) {
     render();
   }
 
-  root.querySelector('#galleryPrev').addEventListener('click', () => goTo(current - 1));
-  root.querySelector('#galleryNext').addEventListener('click', () => goTo(current + 1));
+  root.querySelector(`#${prefix}Prev`).addEventListener('click', () => goTo(current - 1));
+  root.querySelector(`#${prefix}Next`).addEventListener('click', () => goTo(current + 1));
 
   document.addEventListener('keydown', e => {
     if (document.body.contains(root)) {
