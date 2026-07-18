@@ -68,6 +68,7 @@ function renderAddonDetail() {
     <div class="detail-section-title">features</div>
     <ul class="card-features">${addon.features.map(f => `<li>${f}</li>`).join('')}</ul>
 
+
     
 
     ${addon.gallery && addon.gallery.length > 0 ? `
@@ -105,7 +106,7 @@ function renderAddonDetail() {
   if (addon.gallery && addon.gallery.length > 0) initGallerySlider(addon.gallery, addon.name, 'gallery');
 
   // update judul tab browser sesuai addon yang dibuka
-  document.title = `${addon.name} — Oceanst`;
+  document.title = `${addon.name} — NAGA Studio`;
 }
 
 /* ── slider galeri/tutorial: satu foto tampil, sisanya di filmstrip bawah ──

@@ -522,6 +522,49 @@
 
     .btn-sm { padding: .28rem .75rem; font-size: .72rem; border-radius: 3px; }
 
+    /* ATTENTION — hidden by default, slide-up on hover */
+    .card-attention-wrap {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .35s ease, opacity .35s ease;
+      opacity: 0;
+    }
+
+    .addon-card:hover .card-attention-wrap {
+      max-height: 120px;
+      opacity: 1;
+    }
+
+    .card-attention {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 3px;
+      margin-bottom: .9rem;
+    }
+
+    .card-attention li {
+      font-size: .76rem; color: var(--muted);
+      display: flex; align-items: flex-start; gap: 7px;
+    }
+
+    .card-attention li::before {
+      content: '▪'; color: var(--violet);
+      flex-shrink: 0; font-size: .58rem; margin-top: 3px;
+    }
+
+    .card-footer {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: .9rem; margin-top: auto; gap: .5rem;
+    }
+
+    .card-ver { font-family: var(--mono); font-size: .68rem; color: var(--muted); }
+
+    .card-btns { display: flex; gap: .45rem; }
+
+    .btn-sm { padding: .28rem .75rem; font-size: .72rem; border-radius: 3px; }
+
+
     /* ─────────────────────────────
        TEAM
     ───────────────────────────── */
